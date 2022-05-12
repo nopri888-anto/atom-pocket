@@ -15,7 +15,13 @@ class CreateDompetsTable extends Migration
     {
         Schema::create('dompets', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('referensi');
+            $table->text('deskripsi');
+            $table->bigInteger('status_ID')->unsigned();
             $table->timestamps();
+
+            $table->foreign('status_ID')->references('id')->on('dompet_statuses');
         });
     }
 

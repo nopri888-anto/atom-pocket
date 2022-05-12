@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Dompet_status extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['nama'];
+
+    public function dompet()
+    {
+        return $this->hasOne('App\Models\Dompet', 'status_ID');
+    }
 }
