@@ -31,8 +31,8 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Dompet</a>
-                <a class="collapse-item" href="#">Kategori</a>
+                <a class="collapse-item" href="{{ route('dompet.index') }}">Dompet</a>
+                <a class="collapse-item" href="{{ route('kategori.index') }}">Kategori</a>
             </div>
         </div>
     </li>
@@ -45,8 +45,8 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Dompet Masuk</a>
-                <a class="collapse-item" href="#">Dompet Keluar</a>
+                <a class="collapse-item" href="{{ route('dompetMasuk.index') }}">Dompet Masuk</a>
+                <a class="collapse-item" href="{{ route('dompetKeluar.index') }}">Dompet Keluar</a>
             </div>
         </div>
     </li>
@@ -57,7 +57,7 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Laporan Transaksi</a>
+                <a class="collapse-item" href="{{ route('laporanTransaksi.index') }}">Laporan Transaksi</a>
             </div>
         </div>
     </li>
