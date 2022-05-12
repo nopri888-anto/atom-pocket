@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
 <div class="row">
     <div class="col-md-6">
         <h1 class="h3 mb-4 text-gray-800">Dompet Page</h1>

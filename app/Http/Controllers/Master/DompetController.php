@@ -83,7 +83,8 @@ class DompetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dompet = Dompet::find($id);
+        return view('master.editDompet', compact('dompet'));
     }
 
     /**
@@ -95,7 +96,30 @@ class DompetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required|string|min:5',
+            'deskripsi' => 'string|max:100',
+            'status' => 'required',
+        ]);
+
+        $dompet = Dompet::findOrFail($id);
+
+        $dompet->update([
+            'nama' => $request->nama,
+            'referensi' => $request->referensi,
+            'deskripsi' => $request->deskripsi,
+            'status_ID' => $request->status,
+        ]);
+
+        if ($dompet) {
+            return redirect()->route('dompet.index')->with([
+                'success' => 'Sukses update dompet!'
+            ]);
+        } else {
+            return redirect()->back()->withInput()->with([
+                'error' => 'Gagal update dompet!'
+            ]);
+        }
     }
 
     /**
