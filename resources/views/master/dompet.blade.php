@@ -41,13 +41,8 @@
                         <td>{{ $dompet->deskripsi }}</td>
                         <td>{{ $dompet->dompet_status->nama }}</td>
                         <td>
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                            </button>
-                            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Aktif</a>
-                                <a class="dropdown-item" href="#">Tidak Aktif</a>
-                            </div>
+                            <a href="{{route('dompet.show', $dompet->id)}}" type="button" class="btn btn-primary">Detail</a>
+                            <a href="{{route('dompet.edit', $dompet->id)}}" type="button" class="btn btn-primary">Edit</a>
                         </td>
                     </tr>
                     @endforeach

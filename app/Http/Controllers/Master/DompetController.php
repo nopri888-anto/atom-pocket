@@ -71,7 +71,8 @@ class DompetController extends Controller
      */
     public function show($id)
     {
-        //
+        $dompet = Dompet::find($id);
+        return view('master.detailDompet', compact('dompet'));
     }
 
     /**
