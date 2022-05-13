@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
 class DompetMasukController extends Controller
@@ -14,7 +15,8 @@ class DompetMasukController extends Controller
      */
     public function index()
     {
-        //
+        $transaksis = Transaksi::all();
+        return view('transaksi.DompetMasuk.dompetMasuk', compact('transaksis'));
     }
 
     /**
