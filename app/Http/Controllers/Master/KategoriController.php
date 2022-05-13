@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kategori;
+use App\Models\Kategori_status;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
@@ -14,7 +16,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        return view('master.kategori');
+        $kategoris = Kategori::all();
+        return view('master.kategori.kategori', compact('kategoris'));
     }
 
     /**
@@ -24,7 +27,8 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        $kategori_status = Kategori_status::all();
+        return view('master.kategori.buatKategori', compact('kategori_status'));
     }
 
     /**
@@ -35,7 +39,27 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required|string|min:5',
+            'deskripsi' => 'string|max:100',
+            'status' => 'required',
+        ]);
+
+        $kategori = Kategori::create([
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            'status_ID' => $request->status,
+        ]);
+
+        if ($kategori) {
+            return redirect()->route('kategori.index')->with([
+                'success' => 'Sukses tambah kategori!'
+            ]);
+        } else {
+            return redirect()->back()->withInput()->with([
+                'error' => 'Gagal tambah kategori!'
+            ]);
+        }
     }
 
     /**
@@ -46,7 +70,8 @@ class KategoriController extends Controller
      */
     public function show($id)
     {
-        //
+        $kategori = Kategori::find($id);
+        return view('master.kategori.detailKategori', compact('kategori'));
     }
 
     /**
@@ -57,7 +82,8 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kategori = Kategori::find($id);
+        return view('master.kategori.editKategori', compact('kategori'));
     }
 
     /**
@@ -69,7 +95,29 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required|string|min:5',
+            'deskripsi' => 'string|max:100',
+            'status' => 'required',
+        ]);
+
+        $kategori = Kategori::findOrFail($id);
+
+        $kategori->update([
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            'status_ID' => $request->status,
+        ]);
+
+        if ($kategori) {
+            return redirect()->route('kategori.index')->with([
+                'success' => 'Sukses update kategori!'
+            ]);
+        } else {
+            return redirect()->back()->withInput()->with([
+                'error' => 'Gagal update kategori!'
+            ]);
+        }
     }
 
     /**
