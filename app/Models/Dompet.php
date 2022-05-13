@@ -15,4 +15,9 @@ class Dompet extends Model
     {
         return $this->belongsTo('App\Models\Dompet_status', 'status_ID');
     }
+
+    public function transaksi()
+    {
+        return $this->hasOne('App\Models\Transaksi', 'dompet_ID');
+    }
 }
