@@ -8,17 +8,10 @@
 @endif
 <div class="row">
     <div class="col-md-6">
-        <h1 class="h3 mb-4 text-gray-800">Transaksi Masuk</h1>
+        <h1 class="h3 mb-4 text-gray-800">Transaksi Keluar Page</h1>
     </div>
     <div class="col-md-6 text-right">
-        <a href="{{route('dompetMasuk.create')}}" type="button" class="btn btn-primary">Buat Baru</a>
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Status
-        </button>
-        <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Aktif</a>
-            <a class="dropdown-item" href="#">Tidak Aktif</a>
-        </div>
+        <a href="{{route('dompetKeluar.create')}}" type="button" class="btn btn-primary">Buat Baru</a>
     </div>
 </div>
 
@@ -36,6 +29,7 @@
                         <th>Kategori</th>
                         <th>Nilai</th>
                         <th>Dompet</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,8 +43,7 @@
                         <td>{{ $transaksi->nilai }}</td>
                         <td>{{ $transaksi->dompet->nama }}</td>
                         <td>
-                            <a href="{{route('dompetMasuk.show', $transaksi->id)}}" type="button" class="btn btn-primary">Detail</a>
-                            <a href="{{route('dompetMasuk.edit', $transaksi->id)}}" type="button" class="btn btn-primary">Edit</a>
+                            <a href="{{route('dompetKeluar.show', $transaksi->id)}}" type="button" class="btn btn-primary">Detail</a>
                         </td>
                     </tr>
                     @endforeach

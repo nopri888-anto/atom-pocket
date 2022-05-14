@@ -17,7 +17,7 @@ class DompetController extends Controller
     public function index()
     {
         $dompets = Dompet::all();
-        return view('master.dompet.dompet', compact('dompets'));
+        return view('master.dompet.index', compact('dompets'));
     }
 
     /**
@@ -28,7 +28,7 @@ class DompetController extends Controller
     public function create()
     {
         $dompet_status = Dompet_status::all();
-        return view('master.dompet.buatDompet', compact('dompet_status'));
+        return view('master.dompet.create', compact('dompet_status'));
     }
 
     /**
@@ -72,7 +72,7 @@ class DompetController extends Controller
     public function show($id)
     {
         $dompet = Dompet::find($id);
-        return view('master.dompet.detailDompet', compact('dompet'));
+        return view('master.dompet.detail', compact('dompet'));
     }
 
     /**
@@ -84,7 +84,7 @@ class DompetController extends Controller
     public function edit($id)
     {
         $dompet = Dompet::find($id);
-        return view('master.dompet.editDompet', compact('dompet'));
+        return view('master.dompet.edit', compact('dompet'));
     }
 
     /**

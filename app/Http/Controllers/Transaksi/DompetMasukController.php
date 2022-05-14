@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kategori;
 use App\Models\Transaksi;
+use App\Models\Dompet;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DompetMasukController extends Controller
@@ -16,7 +19,7 @@ class DompetMasukController extends Controller
     public function index()
     {
         $transaksis = Transaksi::all();
-        return view('transaksi.DompetMasuk.dompetMasuk', compact('transaksis'));
+        return view('transaksi.DompetMasuk.index', compact('transaksis'));
     }
 
     /**
@@ -26,7 +29,28 @@ class DompetMasukController extends Controller
      */
     public function create()
     {
-        //
+
+        $tanggal = Carbon::now()->format('Y-m-d');
+        $date = Carbon::now();
+
+        $transaksi = Transaksi::count();
+        $formatDate = $date->year;
+        if ($transaksi == 0) {
+            $nourut = 1000001;
+            $kode = 'WIN' . $formatDate . $nourut;
+        } else {
+            $transaksiTerakhir = Transaksi::all()->last();
+            $urut = (int)substr($transaksiTerakhir->kode, -7) + 1;
+            $kode = 'WIN' . $formatDate . $urut;
+        }
+
+        $kategori = Kategori::all();
+        $dompet = Dompet::all();
+
+        return view(
+            'transaksi.DompetMasuk.create',
+            compact('kategori', 'dompet', 'kode', 'tanggal')
+        );
     }
 
     /**
@@ -37,7 +61,34 @@ class DompetMasukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'kode' => 'required|string',
+            'tanggal' => 'required|string',
+            'kategori' => 'required',
+            'dompet' => 'required',
+            'nilai' => 'required|numeric',
+            'deskripsi' => 'required|max:100',
+        ]);
+
+        $transaksi = Transaksi::create([
+            'kode' => $request->kode,
+            'tanggal' => $request->tanggal,
+            'kategori_ID' => $request->kategori,
+            'dompet_ID' => $request->dompet,
+            'nilai' => '(+)' . $request->nilai,
+            'deskripsi' => $request->deskripsi,
+            'status_ID' => 1,
+        ]);
+
+        if ($transaksi) {
+            return redirect()->route('dompetMasuk.index')->with([
+                'success' => 'Sukses tambah transaksi baru!'
+            ]);
+        } else {
+            return redirect()->back()->withInput()->with([
+                'error' => 'Gagal tambah transaksi baru!'
+            ]);
+        }
     }
 
     /**
@@ -48,7 +99,8 @@ class DompetMasukController extends Controller
      */
     public function show($id)
     {
-        //
+        $transaksi = Transaksi::find($id);
+        return view('transaksi.DompetMasuk.detail', compact('transaksi'));
     }
 
     /**
