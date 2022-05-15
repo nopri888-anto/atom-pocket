@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-md-6"></div>
     <div class="col-md-6 text-right">
-        <a href="{{route('laporanTransaksi.index')}}" type="button" class="btn btn-success">Export Excel</a>
+        <a href="{{route('laporanTransaksi.create')}}" type="button" class="btn btn-success">Export Excel</a>
         <a href="{{route('laporanTransaksi.index')}}" type="button" class="btn btn-primary">Kelola Transaksi</a>
     </div>
 </div>

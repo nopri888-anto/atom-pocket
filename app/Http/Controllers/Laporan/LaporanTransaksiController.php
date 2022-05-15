@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Dompet;
 use App\Models\Kategori;
 use App\Models\Transaksi;
-use Illuminate\Support\Facades\DB;
+use App\Exports\TransaksiExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanTransaksiController extends Controller
 {
@@ -41,6 +42,7 @@ class LaporanTransaksiController extends Controller
      */
     public function create()
     {
+        return Excel::download(new TransaksiExport, 'transaksi.xlsx');
     }
 
     /**
