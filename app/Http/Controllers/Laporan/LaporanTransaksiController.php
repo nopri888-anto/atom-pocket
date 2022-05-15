@@ -21,14 +21,10 @@ class LaporanTransaksiController extends Controller
 
         if ($request->start_date || $request->end_date) {
 
-            $start_date = $request->start_date;
-            $end_date = $request->end_date;
-            $kategori_ID = $request->kategori;
-            $dompet_ID = $request->dompet;
-
-            $datas = Transaksi::whereBetween('tanggal',  [$start_date, $end_date])
-                ->where('kategori_ID', "=", $kategori_ID)
-                ->where('dompet_ID', "=", $dompet_ID)
+            $datas = Transaksi::whereBetween('tanggal',  [$request->start_date, $request->end_date])
+                ->where('kategori_ID', "=", $request->kategori)
+                ->where('dompet_ID', "=", $request->dompet)
+                ->where('status_ID', "=", 1)
                 ->get();
             return view('laporan.detail', compact('datas'));
         } else {
