@@ -16,17 +16,18 @@ class TransaksiExport implements FromCollection, WithHeadings
             'kode',
             'nilai',
             'deskripsi',
-            'kategori_ID',
-            'dompet_ID',
-            'status_ID',
+            'kategori',
+            'dompet',
+            'status',
         ];
     }
+
+
     /**
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        // return Transaksi::all();
         return Transaksi::getData();
     }
 }

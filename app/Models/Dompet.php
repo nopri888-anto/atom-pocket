@@ -9,7 +9,8 @@ class Dompet extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'referensi', 'deskripsi', 'status_ID'];
+    protected $table = "dompets";
+    protected $fillable = ['id', 'nama', 'referensi', 'deskripsi', 'status_ID'];
 
     public function dompet_status()
     {

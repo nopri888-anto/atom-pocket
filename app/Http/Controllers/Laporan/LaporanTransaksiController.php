@@ -10,6 +10,7 @@ use App\Models\Transaksi;
 use App\Exports\TransaksiExport;
 use Maatwebsite\Excel\Facades\Excel;
 
+
 class LaporanTransaksiController extends Controller
 {
     /**
@@ -19,17 +20,29 @@ class LaporanTransaksiController extends Controller
      */
     public function index(Request $request)
     {
+        $transaksi = new Transaksi();
+        $kategoris = Kategori::all();
+        $dompets = Dompet::all();
 
-        if ($request->start_date || $request->end_date) {
-
-            $datas = Transaksi::whereBetween('tanggal',  [$request->start_date, $request->end_date])
-                ->where('kategori_ID', "=", $request->kategori)
-                ->where('dompet_ID', "=", $request->dompet)
-                ->get();
-            return view('laporan.detail', compact('datas'));
+        if (isset($_GET['buatLaporan'])) {
+            if ($request->start_date || $request->end_date) {
+                $datas = $transaksi->Laporan($request);
+                return view('laporan.detail', compact('datas'));
+            } else {
+                return view('laporan.index', compact('kategoris', 'dompets'));
+            }
+        } elseif (isset($_GET['exportExcel'])) {
+            if ($request->start_date || $request->end_date) {
+                $datas = $transaksi->exportToExcel($request);
+                if ($datas) {
+                    return Excel::download(new TransaksiExport, 'transaksi.xlsx');
+                } else {
+                    return view('laporan.index', compact('kategoris', 'dompets'));
+                }
+            } else {
+                return view('laporan.index', compact('kategoris', 'dompets'));
+            }
         } else {
-            $kategoris = Kategori::all();
-            $dompets = Dompet::all();
             return view('laporan.index', compact('kategoris', 'dompets'));
         }
     }
@@ -41,7 +54,7 @@ class LaporanTransaksiController extends Controller
      */
     public function create()
     {
-        return Excel::download(new TransaksiExport, 'transaksi.xlsx');
+        //
     }
 
     /**

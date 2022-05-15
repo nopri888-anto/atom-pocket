@@ -9,7 +9,9 @@ class Transaksi_status extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama'];
+    protected $table = "transaksi_statuses";
+
+    protected $fillable = ['id', 'nama'];
 
     public function transaksi()
     {

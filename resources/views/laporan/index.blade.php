@@ -51,8 +51,9 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-md btn-primary">Buat Laporan</button>
-                    <a href="{{route('laporanTransaksi.create')}}" type="button" class="btn btn-success">Export Excel</a>
+                    <button type="submit" name="buatLaporan" class="btn btn-md btn-primary">Buat Laporan</button>
+                    <button type="submit" name="exportExcel" class="btn btn-md btn-success">Export Excel</button>
+                    <!-- <a href="{{route('laporanTransaksi.create')}}" type="button" class="btn btn-success">Export Excel</a> -->
                 </div>
             </div>
 
