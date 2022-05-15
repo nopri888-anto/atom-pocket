@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\Laporan\LaporanTransaksiController;
 use App\Http\Controllers\Master\DompetController;
 use App\Http\Controllers\Master\KategoriController;
 use App\Http\Controllers\Transaksi\DompetKeluarController;
 use App\Http\Controllers\Transaksi\DompetMasukController;
-use App\Http\Controllers\Laporan\LaporanTransaksiController;
+use App\Http\Controllers\Laporan\LaporanTransaksiKeluarMasukController;
 use Illuminate\Support\Facades\Route;
 
 /*
