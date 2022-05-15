@@ -20,8 +20,7 @@ class DompetKeluarController extends Controller
     public function index()
     {
 
-        $transaksis = Transaksi::all();
-        // $transaksis = DB::table('transaksis')->where('status_ID', '=', 2)->get();
+        $transaksis = Transaksi::where('status_ID', "=", 2)->get();
         return view('transaksi.DompetKeluar.index', compact('transaksis'));
     }
 
@@ -35,7 +34,8 @@ class DompetKeluarController extends Controller
         $tanggal = Carbon::now()->format('Y-m-d');
         $date = Carbon::now();
 
-        $transaksi = Transaksi::count();
+        $transaksi = Transaksi::where('status_ID', "=", 2)
+            ->count('kode');
         $formatDate = $date->year;
         if ($transaksi == 0) {
             $nourut = 1000001;
@@ -77,7 +77,7 @@ class DompetKeluarController extends Controller
             'tanggal' => $request->tanggal,
             'kategori_ID' => $request->kategori,
             'dompet_ID' => $request->dompet,
-            'nilai' => '(-)' . $request->nilai,
+            'nilai' => '-' . $request->nilai,
             'deskripsi' => $request->deskripsi,
             'status_ID' => 2,
         ]);

@@ -5,7 +5,7 @@ use App\Http\Controllers\Master\DompetController;
 use App\Http\Controllers\Master\KategoriController;
 use App\Http\Controllers\Transaksi\DompetKeluarController;
 use App\Http\Controllers\Transaksi\DompetMasukController;
-use App\Http\Controllers\Laporan\LaporanTransaksiKeluarMasukController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,5 +28,5 @@ Route::resource('kategori', KategoriController::class);
 Route::resource('dompetMasuk', DompetMasukController::class);
 Route::resource('dompetKeluar', DompetKeluarController::class);
 Route::resource('laporanTransaksi', LaporanTransaksiController::class);
-
+Route::resource('dashboard', DashboardController::class);
 // Route::get('laporanTransaksi', 'Laporan\LaporanTransaksiController@transaksiExport')->name('laporan.transaksiExport');
