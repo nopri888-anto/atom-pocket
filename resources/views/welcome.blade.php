@@ -417,7 +417,7 @@
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <a href="{{ route('dashboard.index') }}" class="nav-link flex justify-center pt-8 sm:justify-start sm:pt-0">Ke Halaman Dashboard</a>
+                    <a href="{{ route('dashboard.index') }}" class="nav-link flex justify-center pt-8 sm:justify-start sm:pt-0 ">Ke Halaman Dashboard</a>
                 </div>
                 <div class="col-md-4"></div>
             </div>

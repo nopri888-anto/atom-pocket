@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Transaksi extends Model
 {
     use HasFactory;
+
+    protected $table = "transaksis";
 
     protected $fillable = [
         'kode',
@@ -32,5 +35,20 @@ class Transaksi extends Model
     public function transaksi_status()
     {
         return $this->belongsTo('App\Models\Transaksi_status', 'status_ID');
+    }
+
+    public static function getData()
+    {
+        $records = DB::table('transaksis')->select(
+            'tanggal',
+            'kode',
+            'nilai',
+            'deskripsi',
+            'dompet_ID',
+            'kategori_ID',
+            'status_ID',
+        )->get();
+
+        return $records;
     }
 }

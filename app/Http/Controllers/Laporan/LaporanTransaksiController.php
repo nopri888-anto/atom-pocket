@@ -25,7 +25,6 @@ class LaporanTransaksiController extends Controller
             $datas = Transaksi::whereBetween('tanggal',  [$request->start_date, $request->end_date])
                 ->where('kategori_ID', "=", $request->kategori)
                 ->where('dompet_ID', "=", $request->dompet)
-                ->where('status_ID', "=", 1)
                 ->get();
             return view('laporan.detail', compact('datas'));
         } else {
